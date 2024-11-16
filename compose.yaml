@@ -1,0 +1,52 @@
+﻿services:
+  bookings.api:
+    image: bookings
+    container_name: Bookings.API
+    build:
+      context: .
+      dockerfile: Bookings.API/Dockerfile
+    environment:
+      - RabbitMQ__Host=amqp://bookings-queue:5672
+      - RabbitMQ__Username=guest
+      - RabbitMQ__Password=guest
+    ports:
+      - "3500:8080"
+      - "3501:8081"
+                
+  reservations.api:
+    image: reservations
+    container_name: Reservations.API
+    build:
+      context: .
+      dockerfile: Reservations.API/Dockerfile
+    ports:
+      - "3510:8080"
+      - "3511:8081"
+        
+  notifications.api:
+    image: notifications
+    container_name: Notifications.API
+    build:
+      context: .
+      dockerfile: Notifications.API/Dockerfile
+    environment:
+      - RabbitMQ__Host=amqp://bookings-queue:5672
+      - RabbitMQ__Username=guest
+      - RabbitMQ__Password=guest
+    ports:
+      - "3520:8080"
+      - "3521:8081"
+  
+  bookings.queue:
+    image: rabbitmq:management-alpine
+    container_name: Bookings.Queue
+    hostname: bookings-queue
+    volumes:
+      - ./.containers/queue/data/:/var/lib/rabbitmq
+      - ./.containers/queue/log/:/var/log/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"

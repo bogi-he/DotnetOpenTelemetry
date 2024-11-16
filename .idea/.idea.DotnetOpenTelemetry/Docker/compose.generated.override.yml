@@ -1,0 +1,59 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  bookings.api:
+    build:
+      context: "/Users/bogi/Dev/Projects/DotnetOpenTelemetry"
+      dockerfile: "Bookings.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Bookings.API.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "bookings:dev"
+    ports: []
+    volumes:
+    - "/Users/bogi/Dev/Projects/DotnetOpenTelemetry/Bookings.API:/app:rw"
+    - "/Users/bogi/Dev/Projects/DotnetOpenTelemetry:/src:rw"
+    - "/Users/bogi/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"
+  notifications.api:
+    build:
+      context: "/Users/bogi/Dev/Projects/DotnetOpenTelemetry"
+      dockerfile: "Notifications.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Notifications.API.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "notifications:dev"
+    ports: []
+    volumes:
+    - "/Users/bogi/Dev/Projects/DotnetOpenTelemetry/Notifications.API:/app:rw"
+    - "/Users/bogi/Dev/Projects/DotnetOpenTelemetry:/src:rw"
+    - "/Users/bogi/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"
+  reservations.api:
+    build:
+      context: "/Users/bogi/Dev/Projects/DotnetOpenTelemetry"
+      dockerfile: "Reservations.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Reservations.API.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "reservations:dev"
+    ports: []
+    volumes:
+    - "/Users/bogi/Dev/Projects/DotnetOpenTelemetry/Reservations.API:/app:rw"
+    - "/Users/bogi/Dev/Projects/DotnetOpenTelemetry:/src:rw"
+    - "/Users/bogi/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"
