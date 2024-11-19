@@ -1,7 +1,7 @@
 ﻿services:
   bookings.api:
     image: bookings
-    container_name: Bookings.API
+    container_name: bookings.api
     build:
       context: .
       dockerfile: Bookings.API/Dockerfile
@@ -12,20 +12,26 @@
     ports:
       - "3500:8080"
       - "3501:8081"
+    depends_on:
+      - postgres.db
+      - bookings.queue
                 
   reservations.api:
     image: reservations
-    container_name: Reservations.API
+    container_name: reservations.api
     build:
       context: .
       dockerfile: Reservations.API/Dockerfile
     ports:
       - "3510:8080"
       - "3511:8081"
+    depends_on:
+      - postgres.db
+      - bookings.queue
         
   notifications.api:
     image: notifications
-    container_name: Notifications.API
+    container_name: notifications.api
     build:
       context: .
       dockerfile: Notifications.API/Dockerfile
@@ -36,10 +42,13 @@
     ports:
       - "3520:8080"
       - "3521:8081"
+    depends_on:
+      bookings.queue:
+        condition: service_healthy
   
   bookings.queue:
     image: rabbitmq:management-alpine
-    container_name: Bookings.Queue
+    container_name: bookings.queue
     hostname: bookings-queue
     volumes:
       - ./.containers/queue/data/:/var/lib/rabbitmq
@@ -50,3 +59,21 @@
     ports:
       - "5672:5672"
       - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  
+  postgres.db:
+    image: "postgres:latest"
+    container_name: postgres.database
+    environment:
+      - POSTGRES_DB=example
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/postgres-db:/var/lib/postgresql/data
+    ports:
+      - "5432:5423"
+      
