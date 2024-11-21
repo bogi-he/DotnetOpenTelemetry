@@ -8,7 +8,7 @@ services:
     command: []
     entrypoint:
     - "dotnet"
-    - "/app/bin/Debug/net8.0/Bookings.API.dll"
+    - "/app/bin/Debug/net9.0/Bookings.API.dll"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
@@ -27,7 +27,7 @@ services:
     command: []
     entrypoint:
     - "dotnet"
-    - "/app/bin/Debug/net8.0/Notifications.API.dll"
+    - "/app/bin/Debug/net9.0/Notifications.API.dll"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
@@ -46,7 +46,7 @@ services:
     command: []
     entrypoint:
     - "dotnet"
-    - "/app/bin/Debug/net8.0/Reservations.API.dll"
+    - "/app/bin/Debug/net9.0/Reservations.API.dll"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"

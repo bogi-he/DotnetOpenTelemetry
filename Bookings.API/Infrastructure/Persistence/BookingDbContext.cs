@@ -6,7 +6,7 @@ namespace Bookings.API.Infrastructure.Persistence;
 /// <summary>
 /// Database context
 /// </summary>
-/// <remarks>Add Migration: While in Bookings.API folder - dotnet ef migrations --context BookingDbContext "{message}"</remarks>
+/// <remarks>Add Migration: While in BookingsAPI folder - dotnet ef migrations --context BookingDbContext "{message}"</remarks>
 public class BookingDbContext : DbContext
 {
     public BookingDbContext(DbContextOptions<BookingDbContext> options, IConfiguration configuration) : base(options)

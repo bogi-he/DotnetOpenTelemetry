@@ -1,9 +1,8 @@
 using Bookings.API.Services;
+using Bookings.API.Extensions;
+using Bookings.API.Setup;
 using Common.Extensions;
 using Asp.Versioning;
-using Bookings.API.Extensions;
-using Bookings.API.Infrastructure.Persistence;
-using Bookings.API.Setup;
 
 var builder = WebApplication.CreateBuilder(args);
 
