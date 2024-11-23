@@ -13,7 +13,7 @@ public class BookingDbContext : DbContext
     {
     }
     
-    public DbSet<Booking> Bookings { get; set; }
+    public DbSet<Booking> Bookings => Set<Booking>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
