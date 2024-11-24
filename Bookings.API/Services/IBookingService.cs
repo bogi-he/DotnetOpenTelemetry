@@ -4,5 +4,5 @@ namespace Bookings.API.Services;
 
 public interface IBookingService
 {
-    Task<Booking> CreateBooking(Guid venueId, DateTime reservationDate);
+    Task<Booking> CreateBooking(Guid venueActivityId);
 }

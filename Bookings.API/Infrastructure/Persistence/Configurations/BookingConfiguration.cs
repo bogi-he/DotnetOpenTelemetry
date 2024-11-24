@@ -12,11 +12,7 @@ public class BookingConfiguration : IEntityTypeConfiguration<Booking>
             .HasKey(b => b.Id);
 
         builder
-            .Property(b => b.VenueId)
-            .IsRequired();
-
-        builder
-            .Property(b => b.ReservationDate)
+            .Property(b => b.VenueActivityId)
             .IsRequired();
     }
 }

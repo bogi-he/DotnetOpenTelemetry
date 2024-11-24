@@ -3,19 +3,13 @@ using Bookings.API.Models;
 
 namespace Bookings.API.Services;
 
-public class BookingService : IBookingService
+public class BookingService(BookingDbContext context) : IBookingService
 {
-    private readonly BookingDbContext _context;
+    private readonly BookingDbContext _context = context ?? throw new ArgumentNullException(nameof(context));
 
-    public BookingService(BookingDbContext context)
+    public async Task<Booking> CreateBooking(Guid venueActivityId)
     {
-        _context = context ?? throw new ArgumentNullException(nameof(context));
-    }
-    
-    public async Task<Booking> CreateBooking(Guid venueId, DateTime reservationDate)
-    {
-        // Check Reservation is available
-        var booking = new Booking(venueId, reservationDate);
+        var booking = new Booking(venueActivityId);
         
         _context.Bookings.Add(booking);
         await _context.SaveChangesAsync();

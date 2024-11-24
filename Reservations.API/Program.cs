@@ -1,9 +1,13 @@
 using Reservations.API.Extensions;
 using Reservations.API.Setup;
+using Reservations.API.Services;
 using Common.Extensions;
 using Asp.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IVenueService, VenueService>();
+builder.Services.AddScoped<IVenueActivityService, VenueActivityService>();
 
 builder.Services.AddApiServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -25,7 +29,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.ApplyMigrations();
+    await app.ApplyMigrationsAndSeedDataAsync();
 }
 
 app.UseHttpsRedirection();
